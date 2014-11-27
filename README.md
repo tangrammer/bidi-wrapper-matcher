@@ -4,11 +4,40 @@ This is a clojure implementation of [defrecord-wrapper.aop.Matcher protocol](htt
 
 Using this bidi based wrapper matcher you can apply middleware to  your clojure.core/defrecord functions implementations using [juxt/bidi](https://github.com/juxt/bidi) way
 
-[tangrammer/defrecord-wrapper](https://github.com/tangrammer/defrecord-wrapper)
-
 ## Usage
 
-# Release and Dependencies Information
+```clojure
+(ns your-ns
+  (:require [bidi-wrapper-matcher.bidi-matcher :as bm]))
+
+(defn logging-access-protocol
+  [*fn* this & args]
+  (println ">>>>>>>>>> LOGGING-ACCESS" [this args] (meta *fn*))
+  (apply *fn* (conj args this))
+  )
+
+(defn  bye
+  [*fn* this & args]
+  (println ">>>>>>>>>> BYE FUNCTION" (meta *fn*))
+  (apply *fn* (conj args this))
+  )
+
+(def routes ["" {"defrecord_wrapper.model.Welcome/say_bye/e/a/b" bye
+                         "defrecord_wrapper.with_slash.prot.With_This" logging-access-protocol
+                         "defrecord_wrapper.model"
+                         {"" logging-access-protocol
+                          ".Welcome"
+                          {"" logging-access-protocol
+                           "/greetings/_" logging-access-protocol}
+
+                          }}])
+
+
+(def bidi-matcher (bm/new-bidi-matcher :routes routes))
+
+```
+
+## Releases and Dependencies Information
 ```clojure
 [tangrammer/bidi-wrapper-matcher "0.1.0-SNAPSHOT"]
 ```
