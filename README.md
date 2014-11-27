@@ -4,6 +4,16 @@ This is a clojure implementation of [defrecord-wrapper.aop.Matcher protocol](htt
 
 Using this bidi based wrapper matcher you can apply middleware to  your clojure.core/defrecord functions implementations using [juxt/bidi](https://github.com/juxt/bidi) way
 
+## Releases and Dependencies Information
+```clojure
+[tangrammer/bidi-wrapper-matcher "0.1.0-SNAPSHOT"]
+```
+
+```clojure
+:dependencies [[prismatic/schema "0.3.2"]
+               [bidi "1.10.4"]]
+```
+
 ## Usage
 
 ```clojure
@@ -37,15 +47,6 @@ Using this bidi based wrapper matcher you can apply middleware to  your clojure.
 
 ```
 
-## Releases and Dependencies Information
-```clojure
-[tangrammer/bidi-wrapper-matcher "0.1.0-SNAPSHOT"]
-```
-
-```clojure
-:dependencies [[prismatic/schema "0.3.2"]
-               [bidi "1.10.4"]]
-```
 ## License
 
 Copyright © 2014 Juan Antonio Ruz (juxt.pro)
